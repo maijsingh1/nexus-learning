@@ -1,0 +1,19 @@
+stages:
+  - build
+
+build:
+  stage: build
+  image: alpine:latest
+
+  script:
+    - echo "Building application..."
+    - mkdir -p output
+    - cp -r app output/
+    - cd output
+    - apk add --no-cache zip
+    - zip -r app.zip app
+    - ls -lh app.zip
+
+  artifacts:
+    paths:
+      - output/app.zip
